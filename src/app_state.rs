@@ -1,6 +1,6 @@
-use std::ops::{Deref, DerefMut};
+use std::ops::{ Deref, DerefMut };
 
-use druid::{Data, Lens};
+use druid::{ Data, Lens };
 
 #[derive(Debug, Clone)]
 pub struct TimerTokenData(pub druid::TimerToken);
@@ -36,17 +36,19 @@ pub struct AppState {
     pub token: String,
     pub start_button: &'static str,
     pub ip: String,
-    pub valid_at: String,
     pub run_time: usize,
     pub warning: String,
     pub use_tun: bool,
+    pub use_tcp: bool,
+    pub use_igmp: bool,
     pub auto_restart: bool,
+    pub fast_mode: bool,
     pub debug_mode: bool,
     pub kill_hiper_when_start: bool,
     #[cfg(target_os = "macos")]
     pub init_message: String,
     #[cfg(target_os = "macos")]
-    pub running_script: bool
+    pub running_script: bool,
 }
 
 impl Default for AppState {
@@ -57,10 +59,12 @@ impl Default for AppState {
             start_button: "启动",
             ip: "".into(),
             warning: "".into(),
-            valid_at: "".into(),
             run_time: 0,
             use_tun: true,
+            use_tcp: false,
+            use_igmp: false,
             auto_restart: true,
+            fast_mode: false,
             debug_mode: false,
             kill_hiper_when_start: true,
             #[cfg(target_os = "macos")]
